@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Erebos – Startseite</title>
+  <link rel="stylesheet" href="chrome://browser/content/erebos/erebos.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="chrome://browser/content/erebos/erebos-logo.svg" alt="Erebos" class="logo">
+      <h1>Erebos</h1>
+      <p class="tagline">Aus der Dunkelheit ins Netz</p>
+    </header>
+
+    <section class="status">
+      <h2>I2P-Status</h2>
+      <div id="i2p-status" class="status-box">
+        <span class="status-indicator">⏳</span>
+        <span class="status-text">Prüfe I2P-Verbindung…</span>
+      </div>
+      <p class="hint">
+        <a href="http://127.0.0.1:7070/" target="_blank">I2P-Konsole öffnen</a>
+      </p>
+    </section>
+
+    <section class="links">
+      <h2>Wichtige eepSites</h2>
+      <ul class="eepsite-list">
+        <li>
+          <a href="http://stats.i2p/" target="_blank">
+            <strong>stats.i2p</strong>
+            <span>I2P-Statistiken und Adressbuch</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://identiguy.i2p/" target="_blank">
+            <strong>identiguy.i2p</strong>
+            <span>I2P-Dienste-Verzeichnis</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://i2p-projekt.i2p/" target="_blank">
+            <strong>i2p-projekt.i2p</strong>
+            <span>Offizielle I2P-Startseite</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://forum.i2p/" target="_blank">
+            <strong>forum.i2p</strong>
+            <span>I2P-Community-Forum</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="info">
+      <h2>Über Erebos</h2>
+      <p>
+        Erebos ist ein anonymer Browser für das I2P-Netzwerk. Er basiert auf
+        Firefox ESR 128 und kombiniert die Fingerprint-Härtung des Tor
+        Browsers mit der dezentralen Architektur von I2P.
+      </p>
+      <p>
+        <a href="https://github.com/DataDruide/erebos-browser" target="_blank">
+          Projekt auf GitHub
+        </a>
+      </p>
+    </section>
+
+    <footer>
+      <p>Erebos Browser – Open Source (MPL 2.0)</p>
+    </footer>
+  </div>
+
+  <script src="chrome://browser/content/erebos/erebos.js"></script>
+</body>
+</html>

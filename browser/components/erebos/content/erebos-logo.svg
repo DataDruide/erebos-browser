@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Hintergrund: dunkler Kreis -->
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2a1a3e"/>
+      <stop offset="100%" stop-color="#0d0518"/>
+    </radialGradient>
+    <radialGradient id="eyeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="60%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6a0dad"/>
+    </radialGradient>
+    <radialGradient id="irisGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0d0518"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Äußerer Ring (Schatten) -->
+  <circle cx="128" cy="128" r="120" fill="url(#bgGrad)"/>
+  <circle cx="128" cy="128" r="118" fill="none" stroke="#6a0dad" stroke-width="1" opacity="0.6"/>
+
+  <!-- Netzwerk-Strahlen (dezentral, I2P) -->
+  <g stroke="#8b5cf6" stroke-width="0.8" opacity="0.35">
+    <line x1="128" y1="8" x2="128" y2="30"/>
+    <line x1="128" y1="226" x2="128" y2="248"/>
+    <line x1="8" y1="128" x2="30" y2="128"/>
+    <line x1="226" y1="128" x2="248" y2="128"/>
+    <line x1="43" y1="43" x2="58" y2="58"/>
+    <line x1="198" y1="198" x2="213" y2="213"/>
+    <line x1="43" y1="213" x2="58" y2="198"/>
+    <line x1="198" y1="58" x2="213" y2="43"/>
+  </g>
+
+  <!-- Äußere Augenform -->
+  <path d="M 40 128 Q 128 40 216 128 Q 128 216 40 128 Z"
+        fill="none" stroke="url(#eyeGrad)" stroke-width="3" filter="url(#glow)"/>
+
+  <!-- Iris -->
+  <circle cx="128" cy="128" r="38" fill="url(#eyeGrad)"/>
+  <circle cx="128" cy="128" r="30" fill="url(#irisGrad)"/>
+
+  <!-- Pupille -->
+  <circle cx="128" cy="128" r="14" fill="#0d0518"/>
+  <circle cx="128" cy="128" r="14" fill="none" stroke="#c084fc" stroke-width="1.5" opacity="0.8"/>
+
+  <!-- Lichtreflex -->
+  <circle cx="118" cy="118" r="4" fill="#ffffff" opacity="0.7"/>
+
+  <!-- Netzwerk-Knoten (I2P) -->
+  <g fill="#c084fc" opacity="0.7">
+    <circle cx="128" cy="90" r="2"/>
+    <circle cx="128" cy="166" r="2"/>
+    <circle cx="90" cy="128" r="2"/>
+    <circle cx="166" cy="128" r="2"/>
+  </g>
+
+  <!-- Innerer Ring als Akzent -->
+  <circle cx="128" cy="128" r="60" fill="none" stroke="#6a0dad" stroke-width="0.5" opacity="0.4"/>
+</svg>

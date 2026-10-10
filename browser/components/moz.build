@@ -38,6 +38,7 @@ DIRS += [
     "customizableui",
     "doh",
     "downloads",
+    "erebos",
     "enterprisepolicies",
     "extensions",
     "firefoxview",
@@ -101,6 +102,7 @@ EXTRA_JS_MODULES += [
     "BrowserContentHandler.sys.mjs",
     "BrowserGlue.sys.mjs",
     "distribution.sys.mjs",
+    "AboutErebos.sys.mjs",
 ]
 
 if CONFIG["MOZ_DEBUG"] or CONFIG["MOZ_DEV_EDITION"] or CONFIG["NIGHTLY_BUILD"]:
