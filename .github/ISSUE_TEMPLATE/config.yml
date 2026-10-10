@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Frage stellen
+    url: https://github.com/DataDruide/erebos-browser/discussions
+    about: Für allgemeine Fragen nutze die Discussions.
+  - name: Sicherheitslücke melden
+    url: https://github.com/DataDruide/erebos-browser/security/advisories/new
+    about: Sicherheitslücken bitte privat melden.
