@@ -1,0 +1,19 @@
+{
+  "default": {
+    "searchDefault": "Erebos (I2P)",
+    "searchOrder": ["Erebos (I2P)", "DuckDuckGo", "Wikipedia (de)"],
+    "visibleDefaultEngines": ["erebos-i2p", "ddg", "wikipedia"]
+  },
+  "regionOverrides": {
+    "DE": {
+      "searchDefault": "Erebos (I2P)",
+      "searchOrder": ["Erebos (I2P)", "DuckDuckGo", "Wikipedia (de)"]
+    }
+  },
+  "locales": {
+    "de": {
+      "searchDefault": "Erebos (I2P)",
+      "searchOrder": ["Erebos (I2P)", "DuckDuckGo", "Wikipedia (de)"]
+    }
+  }
+}

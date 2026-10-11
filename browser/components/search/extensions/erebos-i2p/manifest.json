@@ -1,0 +1,27 @@
+{
+  "name": "Erebos (DuckDuckGo über I2P)",
+  "description": "DuckDuckGo HTML über I2P – keine Telemetrie, kein Tracking",
+  "manifest_version": 2,
+  "version": "1.0",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "erebos-i2p@erebos-browser.org"
+    }
+  },
+  "hidden": true,
+  "icons": {
+    "16": "favicon.ico"
+  },
+  "web_accessible_resources": ["favicon.ico"],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "keyword": ["@erebos", "@i2p", "@ddg"],
+      "name": "Erebos (I2P)",
+      "search_url": "https://html.duckduckgo.com/html/",
+      "search_form": "https://html.duckduckgo.com/html/",
+      "search_url_get_params": "q={searchTerms}",
+      "suggest_url": "https://html.duckduckgo.com/ac/",
+      "suggest_url_get_params": "q={searchTerms}&type=list"
+    }
+  }
+}

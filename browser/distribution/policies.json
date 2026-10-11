@@ -1,0 +1,8 @@
+{
+  "policies": {
+    "SearchEngines": {
+      "Default": "Erebos (I2P)",
+      "PreventInstalls": false
+    }
+  }
+}
