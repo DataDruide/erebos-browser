@@ -9,6 +9,12 @@
 #define mdn_icon data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABgElEQVR4AWPouPiRpmjUAjgatSBj+aG0OVuyVhymsgWl2y475zXySikwwIC4lpFDVk3avG0BrXP9mmeV7bhCvgXuxW3M7JwMeAGfpByZFpjHFzAQB2KmrSfZAtuMKgaiAZ+MUuLc7SRY4FbYwkA60HAJiJm8uubQAwIWeJV1MlAAOAREHDJrcFqQMG+ngIK6oKyykLwqAyMjeXZwiUjgtKD+yGMIwyGzmoGBTAs4hcXrgObgi4OiVkpCiUtYov7YU5wW1B194t0ww69ldvjktYouwWRYIGdkQ1Q+iJ28hp2Xn7B5zKzIPAlNw6S52wlbkL3mJJecOq+CBqeIJC6TjUJTMlcdz9lwLmriSuPgJBVbj/D+5SSXRequQVhNN4nIoEJhV77jKgs7B6bprJw85XtuU8GCpNlbSS3gSA4ii4QiTAvElDWpWeH41kxg5eZDSypUrtFKd1zTcA1EpHRDS5rUyQEts+VN7JjYOGR0TWhY6RdsOhc/Y9NoswUJjVoAAE+h555Rgcg2AAAAAElFTkSuQmCC
 
 #define addon_icon data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABOFBMVEUAAAAAzdwAydcAyNgA//8AzOYAydcAyNgAyNgA2NgAytoAzNkAytgAydgA29sA0egAyNgAyNgA//8AyNgAydgA//8Ay9cAydcAytkAz90Ay9gA1eoAydgAytsAyNgAytgAydkAydgAydgAyNgAydgAyNcAy9oAydgA//8AytsAy9kAytkAyNgAydgAydkAy9kAzP8AydgAydgAydgAz98AzN0AyNcAyNsAydcAydgAydgAydcAytgAytcAydcAydcAytcAydcAyNcAydcAy9gAztgAydcAydgAzOAAydcAyNgAyNgAytwAyNcAyNgAy9wAyNcAyNcAyNgAydgAyNcAydcAydgA0uEAydkAyNgAyeQA4+MAyNgAydkAzN0AyNsA1f8AyNgAydgAydcA1eMAydgAydcAyNdj6PGJAAAAZ3RSTlMAJFpBAQqm8qwNPiiPygcLv8QEw5cDQMA1JU4MwiuDbl/+6+m4+0XLAj9KePz9cjYFvervEA/IDsfFr+xcgeaOYIDo+ica1OMZ9bXlHe73LM3M35itxs8Rf5ATCbFeHjgGttC5ErzO3WvwaAAAAWxJREFUOMt9kudCwkAQhFcITQWCoaggiBqxoaixYUVsYMMGCmLXff838LIXCJAL84fvmCHsTg4AYMDhlIDkcnu8Po4w6BjiIA0joj+gY1BmGKLEiMIwHNFR9xGjuh8jpMQoYZjRGBGOA8QTHDEUB4hynABwcEqCT8GW2DNSnCYBnJzSoSk0NT2jcphlM/rRXpk5NkRgfmFxSWBml6MrOWNlWBUEEmDKtyYIrGttP66gSP4Nww8mUKzNLd5/zHaJbb1Tl9xnzR2WcGM/5QE8BLvJvf0Dc4HDo8IxUVECL5Vywv7s9Mzwz/WLcFHSsWy8w0sa9+qa/JtbOlUY3mnGLbjnCz9Q4JEfnhCrNb5nXi3w754p8MIPKVWpt6psGJ+vFJBbBUO3GlozzYdsSmCV1NlntiTnegNvPQ29Wx7h7fKrEUvg47PD/6oLpgh8m7//AZEav4b/J/bbb75SAzvR3crY+6y8fLGsQV9ZSvwHF4LQIhDjT+8AAAAASUVORK5CYII=
+
+#define erebos_icon data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%231a1a2e'/%3E%3Cpath d='M 2 8 Q 8 2 14 8 Q 8 14 2 8 Z' fill='none' stroke='%238b5cf6' stroke-width='0.5'/%3E%3Ccircle cx='8' cy='8' r='2.5' fill='%23c084fc'/%3E%3C/svg%3E
+
+#define i2p_icon data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%236a0dad'/%3E%3Ctext x='8' y='11.5' text-anchor='middle' font-size='7' font-weight='bold' fill='white' font-family='sans-serif'%3EI2P%3C/text%3E%3C/svg%3E
+
+
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
@@ -64,6 +70,16 @@
             <dt><a href="https://planet.mozilla.org/" icon="@mozilla_icon@" data-l10n-id="default-bookmarks-planet">default-bookmarks-planet</a></dt>
         </dl><p>
 #endif
+    <dt><h3 data-l10n-id="default-bookmarks-erebos-heading">default-bookmarks-erebos-heading</h3></dt>
+        <dl><p>
+            <dt><a href="about:erebos" icon="@erebos_icon@" data-l10n-id="default-bookmarks-erebos-start">default-bookmarks-erebos-start</a></dt>
+            <dt><a href="http://i2p-projekt.i2p/" icon="@i2p_icon@" data-l10n-id="default-bookmarks-i2p-projekt">default-bookmarks-i2p-projekt</a></dt>
+            <dt><a href="http://stats.i2p/" icon="@i2p_icon@" data-l10n-id="default-bookmarks-i2p-stats">default-bookmarks-i2p-stats</a></dt>
+            <dt><a href="http://identiguy.i2p/" icon="@i2p_icon@" data-l10n-id="default-bookmarks-i2p-identiguy">default-bookmarks-i2p-identiguy</a></dt>
+            <dt><a href="http://forum.i2p/" icon="@i2p_icon@" data-l10n-id="default-bookmarks-i2p-forum">default-bookmarks-i2p-forum</a></dt>
+            <dt><a href="http://zzz.i2p/" icon="@i2p_icon@" data-l10n-id="default-bookmarks-i2p-zzz">default-bookmarks-i2p-zzz</a></dt>
+        </dl><p>
+
 </dl>
 </body>
 </html>

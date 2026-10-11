@@ -50,3 +50,26 @@ default-bookmarks-crashes = All your crashes
 
 # Nightly builds only, link title for https://planet.mozilla.org/
 default-bookmarks-planet = Planet Mozilla
+
+# Erebos / I2P bookmarks folder
+default-bookmarks-erebos-heading = Erebos / I2P
+
+# Link title for about:erebos
+default-bookmarks-erebos-start = Erebos Startseite
+
+# Link title for http://i2p-projekt.i2p/
+default-bookmarks-i2p-projekt = I2P-Projekt
+
+# Link title for http://stats.i2p/
+default-bookmarks-i2p-stats = I2P-Statistiken
+
+# Link title for http://identiguy.i2p/
+default-bookmarks-i2p-identiguy = I2P-Verzeichnis
+
+# Link title for http://forum.i2p/
+default-bookmarks-i2p-forum = I2P-Forum
+
+# Link title for http://zzz.i2p/
+default-bookmarks-i2p-zzz = I2P-Übersicht
+
+# Erebos / I2P bookmarks folder
