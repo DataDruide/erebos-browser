@@ -1,72 +1,68 @@
 # Erebos Browser
 
-> **Anonymer Browser für I2P und Deepweb** – basiert auf Firefox ESR 128
-> (via Mullvad Browser `base-browser-128.10.1esr-14.5-1`).
+> **Anonymer Browser fuer I2P und Deepweb mit Post-Quanten-Kryptographie**
 
 [![Lint JS](https://github.com/DataDruide/erebos-browser/actions/workflows/lint-js.yml/badge.svg)](https://github.com/DataDruide/erebos-browser/actions/workflows/lint-js.yml)
 [![Docs](https://github.com/DataDruide/erebos-browser/actions/workflows/docs-browser.yml/badge.svg)](https://github.com/DataDruide/erebos-browser/actions/workflows/docs-browser.yml)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
 
-**Erebos** ist ein auf Privatsphäre und Anonymität optimierter Browser, der
-standardmäßig das **I2P-Netzwerk** nutzt. Er kombiniert die
-Fingerprint-Härtung des Tor Browsers mit der dezentralen Architektur von I2P
-und ist für den Einsatz im Deepweb, in zensurresistenten Umgebungen und für
-anonyme Kommunikation gedacht.
+Erebos ist ein auf Privatsphaere und Anonymitaet optimierter Browser,
+der standardmaessig das I2P-Netzwerk nutzt und mit dem
+Erebos-Network verbunden ist.
 
-## Warum Erebos?
+## Was macht Erebos anders?
 
-Bestehende Browser im Anonymitätsbereich haben jeweils Kompromisse:
-
-| Browser | Stärke | Schwäche |
-|---|---|---|
-| Tor Browser | Beste Anonymität | Zentrales Tor-Netz, langsam |
-| Mullvad Browser | Gute Härtung | Benötigt VPN (zentral) |
-| Brave/Firefox | Schnell | Nicht anonym |
-
-**Erebos** schließt die Lücke: **Tor-typische Härtung + I2P als dezentrales Netzwerk.**
+| Feature | Tor Browser | Mullvad Browser | Erebos |
+|---------|-------------|-----------------|--------|
+| I2P-Integration | Nein | Nein | Ja |
+| Post-Quanten-Krypto | Nein | Nein | Ja |
+| Adaptive Sektoren | Nein | Nein | Ja |
+| Mixnet | Nein | Nein | Ja |
+| Network-Integration | Nein | Nein | Ja |
 
 ## Features
 
 ### Netzwerk
-- I2P als Standard-Proxy (HTTP 127.0.0.1:4444, SOCKS 127.0.0.1:4447)
+- I2P als Standard-Proxy (HTTP 127.0.0.1:4444, SOCKS 4447)
 - DNS-Leak-Schutz
 - WebRTC-Leak-Schutz
 - HTTPS-Only-Modus
 
-### Anonymität
-- Fingerprint-Härtung (resistFingerprinting)
-- Letterboxing (einheitliche Fenstergrößen)
-- Spoof English (einheitliche Sprache)
+### Anonymitaet
+- Fingerprint-Haertung
+- Letterboxing
+- Spoof English
 - First-Party-Isolation
-- Tracker-Blockierung
 
-### Privatsphäre
-- Telemetrie deaktiviert
-- Auto-Updates deaktiviert
-- Sponsored Content aus
-- Startseite: about:blank
-- Sanitize on Shutdown
+### Network-Integration
+- about:erebos mit Live-Network-Status
+- Sektor-Auswahl (fast/standard/high/mixnet)
+- Routing-Test
+- .erebos-Domain-Aufloesung
+
+### Post-Quanten
+- ML-KEM-1024 (NIST Level 5)
+- SLH-DSA-SHA2-256s
+- Threefish-512
 
 ## Installation
 
-### Voraussetzungen
-
-- **I2P-Router** – entweder i2pd (leichtgewichtig) oder Java I2P
-- **Betriebssystem:** macOS 14+, Linux (64-bit), Windows 10+
-
 ### I2P installieren
 
-macOS (Homebrew):
+macOS:
+
     brew install i2pd
     brew services start i2pd
 
-Linux (Debian/Ubuntu):
+Linux:
+
     sudo apt install i2pd
     sudo systemctl enable --now i2pd
 
-Windows: i2pd releases von GitHub
+### Erebos-Network starten
 
-Prüfen, dass I2P läuft:
-    curl http://127.0.0.1:7070/
+    cd ~/Documents/GitHub/erebos-network
+    .venv/bin/python -m erebos_network --serve --port 9050
 
 ### Erebos bauen
 
@@ -75,46 +71,48 @@ Prüfen, dass I2P läuft:
     ./mach bootstrap
     ./mach build
 
-## Entwicklung
+## Verwendung
 
-### Wichtige Dateien
+1. I2P starten
+2. Erebos-Network starten
+3. Erebos-Browser starten
+4. about:erebos oeffnen
+5. Network-Status pruefen
 
-| Datei | Zweck |
-|---|---|
-| browser/branding/erebos/pref/firefox-branding.js | I2P-Proxy + Datenschutz-Prefs |
-| browser/branding/erebos/configure.sh | App-Name, Vendor |
-| browser/config/mozconfig | Build-Flags |
+## Repository-Struktur
 
-### Upstream-Updates einspielen
+    browser/
+        branding/
+            erebos/          # Erebos-Branding
+        components/
+            erebos/          # about:erebos
+                content/
+                    erebos.html
+                    network-client.js
+                    network-ui.js
+        config/
+            mozconfig
+        base/
+            content/
+                default-bookmarks.html
 
-    git fetch upstream
-    git merge upstream/base-browser-128.10.1esr-14.5-1
+## Dokumentation
 
-## Contributing
-
-Beiträge sind willkommen! Bitte lies zuerst CONTRIBUTING.md.
-
-## Sicherheit
-
-Sicherheitslücken bitte nicht als öffentliches Issue melden, sondern
-per E-Mail an den Maintainer. Siehe SECURITY.md.
+- [Erebos-Network](https://github.com/DataDruide/erebos-network)
+- [ARCHITECTURE.md](https://github.com/DataDruide/erebos-network/blob/main/docs/ARCHITECTURE.md)
+- [THREAT_MODEL.md](https://github.com/DataDruide/erebos-network/blob/main/docs/THREAT_MODEL.md)
+- [PQ_CRYPTO.md](https://github.com/DataDruide/erebos-network/blob/main/docs/PQ_CRYPTO.md)
 
 ## Lizenz
 
-Lizenziert unter der Mozilla Public License 2.0 – siehe LICENSE.
-
-Erebos basiert auf:
-- Firefox ESR 128 (MPL 2.0)
-- Mullvad Browser (MPL 2.0)
-- Tor Browser (MPL 2.0)
+MPL 2.0 - siehe LICENSE
 
 ## Danksagung
 
-- Mozilla für Firefox
-- Tor Project für die Fingerprint-Härtung
-- Mullvad für die Base-Browser-Vorlage
-- I2P-Community für das dezentrale Netzwerk
+- Mozilla fuer Firefox
+- Tor Project fuer Fingerprint-Haertung
+- Mullvad fuer Base-Browser-Vorlage
+- I2P-Community fuer das Netzwerk
+- NIST fuer Post-Quanten-Standards
 
----
-
-**Erebos** – *Aus der Dunkelheit ins Netz.*
+Erebos - Aus der Dunkelheit ins Netz.
