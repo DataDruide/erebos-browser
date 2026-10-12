@@ -8,3 +8,7 @@ browser.jar:
   content/erebos/erebos.css       (content/erebos.css)
   content/erebos/erebos.js        (content/erebos.js)
   content/erebos/erebos-logo.svg  (content/erebos-logo.svg)
+  content/erebos/network-client.js      (content/network-client.js)
+  content/erebos/network-ui.js           (content/network-ui.js)
+  content/erebos/network-styles.css      (content/network-styles.css)
+

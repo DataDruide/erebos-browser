@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Erebos – Startseite</title>
   <link rel="stylesheet" href="chrome://browser/content/erebos/erebos.css">
+  <link rel="stylesheet" href="chrome://browser/content/erebos/network-styles.css">
 </head>
 <body>
   <div class="container">
@@ -55,6 +56,36 @@
       </ul>
     </section>
 
+
+    <section class="network-section">
+      <h2>Erebos-Network</h2>
+      <div id="network-status" class="network-status-box">
+        <span class="status-indicator">⏳</span>
+        <span class="status-text">Prüfe Erebos-Network…</span>
+      </div>
+      <p id="network-details" class="network-details"></p>
+
+      <div class="network-form">
+        <label for="sector-select">Anonymitäts-Sektor</label>
+        <select id="sector-select">
+          <option value="fast">Schnell (2 Hops, ~300ms)</option>
+          <option value="standard" selected>Standard (3 Hops, ~800ms)</option>
+          <option value="high">Hoch (5 Hops, ~2s)</option>
+          <option value="mixnet">Mixnet (7 Hops, ~5s)</option>
+        </select>
+
+        <label for="route-target-input">Routing-Test</label>
+        <input id="route-target-input" type="text" placeholder="https://example.com oder http://forum.i2p">
+        <button id="route-btn">Route testen</button>
+        <div id="route-result" class="network-result"></div>
+
+        <label for="erebos-domain-input">.erebos-Domain auflösen</label>
+        <input id="erebos-domain-input" type="text" placeholder="forum.erebos">
+        <button id="resolve-btn">Auflösen</button>
+        <div id="erebos-domain-result" class="network-result"></div>
+      </div>
+    </section>
+
     <section class="info">
       <h2>Über Erebos</h2>
       <p>
@@ -74,6 +105,8 @@
     </footer>
   </div>
 
+  <script src="chrome://browser/content/erebos/network-client.js"></script>
+  <script src="chrome://browser/content/erebos/network-ui.js"></script>
   <script src="chrome://browser/content/erebos/erebos.js"></script>
 </body>
 </html>
