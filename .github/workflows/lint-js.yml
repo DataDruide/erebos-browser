@@ -1,0 +1,42 @@
+name: Lint JS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'browser/components/erebos/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'browser/components/erebos/**'
+
+jobs:
+  lint-erebos:
+    name: Lint Erebos JS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check JS syntax
+        run: |
+          for f in browser/components/erebos/content/*.js; do
+            node --check "$f" && echo "✅ $f" || (echo "❌ $f" && exit 1)
+          done
+
+      - name: Check CSS exists
+        run: |
+          test -f browser/components/erebos/content/erebos.css
+          test -f browser/components/erebos/content/network-styles.css
+          echo "✅ CSS-Dateien vorhanden"
+
+      - name: Check HTML exists
+        run: |
+          test -f browser/components/erebos/content/erebos.html
+          echo "✅ HTML vorhanden"

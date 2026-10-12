@@ -1,0 +1,35 @@
+name: Docs (Browser)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-docs:
+    name: Check Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check core files exist
+        run: |
+          test -f README.md || (echo "❌ README.md fehlt" && exit 1)
+          test -f LICENSE || (echo "❌ LICENSE fehlt" && exit 1)
+          test -f CHANGELOG.md || (echo "⚠️  CHANGELOG.md fehlt" && exit 0)
+          echo "✅ Core-Dateien vorhanden"
+
+      - name: Check Erebos structure
+        run: |
+          test -d browser/branding/erebos || (echo "❌ Branding fehlt" && exit 1)
+          test -d browser/components/erebos || (echo "❌ Component fehlt" && exit 1)
+          test -f browser/components/erebos/content/erebos.html || (echo "❌ Startseite fehlt" && exit 1)
+          echo "✅ Erebos-Struktur vollständig"
+
+      - name: Check I2P config
+        run: |
+          grep -q "network.proxy.type" browser/branding/erebos/pref/firefox-branding.js || (echo "❌ I2P-Config fehlt" && exit 1)
+          echo "✅ I2P-Konfiguration vorhanden"

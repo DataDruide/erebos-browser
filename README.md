@@ -3,6 +3,9 @@
 > **Anonymer Browser für I2P und Deepweb** – basiert auf Firefox ESR 128
 > (via Mullvad Browser `base-browser-128.10.1esr-14.5-1`).
 
+[![Lint JS](https://github.com/DataDruide/erebos-browser/actions/workflows/lint-js.yml/badge.svg)](https://github.com/DataDruide/erebos-browser/actions/workflows/lint-js.yml)
+[![Docs](https://github.com/DataDruide/erebos-browser/actions/workflows/docs-browser.yml/badge.svg)](https://github.com/DataDruide/erebos-browser/actions/workflows/docs-browser.yml)
+
 **Erebos** ist ein auf Privatsphäre und Anonymität optimierter Browser, der
 standardmäßig das **I2P-Netzwerk** nutzt. Er kombiniert die
 Fingerprint-Härtung des Tor Browsers mit der dezentralen Architektur von I2P
