@@ -9,22 +9,24 @@
 
   /**
    * Prüft, ob der lokale I2P-Router erreichbar ist.
-   * Der HTTP-Proxy läuft typischerweise auf 127.0.0.1:4444.
+   * i2pd stellt eine Webkonsole auf 127.0.0.1:7070 bereit.
+   * Der HTTP-Proxy (fuer .i2p-Sites) laeuft typischerweise auf :4444.
    */
   async function checkI2P() {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 3000);
 
-      const response = await fetch("http://127.0.0.1:7070/", {
-        method: "HEAD",
+      // i2pd's HTTP-Konsole auf 7070. no-cors: wir wollen nur wissen,
+      // ob der Port antwortet, nicht was drin steht.
+      await fetch("http://127.0.0.1:7070/", {
         signal: controller.signal,
         mode: "no-cors",
       });
 
       clearTimeout(timeout);
 
-      setStatus("online", "🟢", "I2P-Router ist erreichbar (127.0.0.1:4444)");
+      setStatus("online", "🟢", "I2P-Router ist erreichbar (127.0.0.1:7070)");
     } catch (err) {
       setStatus(
         "offline",
