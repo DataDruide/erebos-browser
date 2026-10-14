@@ -353,3 +353,6 @@ mobile/android/annotations/bin/
 media/libvpx/config/**/config.log
 firefox.js.backup
 *.backup
+
+# ===== Erebos: build artifacts =====
+*.xpi

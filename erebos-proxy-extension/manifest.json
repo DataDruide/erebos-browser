@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Erebos Proxy",
+  "version": "1.0",
+  "description": "Leitet den gesamten Browser-Traffic über das Erebos-Network.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "erebos-proxy@erebos.local",
+      "strict_min_version": "115.0"
+    }
+  },
+  "permissions": [
+    "proxy"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
