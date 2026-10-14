@@ -3,12 +3,10 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 browser.jar:
-% content browser %content/browser/
-  content/erebos/erebos.html      (content/erebos.html)
-  content/erebos/erebos.css       (content/erebos.css)
-  content/erebos/erebos.js        (content/erebos.js)
-  content/erebos/erebos-logo.svg  (content/erebos-logo.svg)
-  content/erebos/network-client.js      (content/network-client.js)
-  content/erebos/network-ui.js           (content/network-ui.js)
-  content/erebos/network-styles.css      (content/network-styles.css)
-
+  content/browser/erebos/erebos.html      (content/erebos.html)
+  content/browser/erebos/erebos.css       (content/erebos.css)
+  content/browser/erebos/erebos.js        (content/erebos.js)
+  content/browser/erebos/erebos-logo.svg  (content/erebos-logo.svg)
+  content/browser/erebos/network-client.js      (content/network-client.js)
+  content/browser/erebos/network-ui.js           (content/network-ui.js)
+  content/browser/erebos/network-styles.css      (content/network-styles.css)

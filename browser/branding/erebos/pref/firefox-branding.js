@@ -65,7 +65,7 @@ pref("network.proxy.share_proxy_settings", true);
 pref("network.proxy.allow_hijacking_localhost", false);
 
 // DNS-Leak-Schutz
-pref("network.trr.mode", 5);
+pref("network.trr.mode", 3);
 pref("network.dns.disablePrefetch", true);
 pref("network.dns.disablePrefetchFromHTTPS", true);
 pref("network.prefetch-next", false);
