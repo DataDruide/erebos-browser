@@ -22,10 +22,10 @@ const ErebosNetworkClient = {
       const timeout = setTimeout(() => controller.abort(), 2000);
       const response = await fetch(`${EREBOS_NETWORK_URL}/status`, {
         signal: controller.signal,
-        mode: "no-cors",
+        mode: "cors",
       });
       clearTimeout(timeout);
-      return true;
+      return response.ok;
     } catch (err) {
       return false;
     }

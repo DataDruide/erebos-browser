@@ -34,9 +34,12 @@
         const stats = await API.getStats();
         const details = document.getElementById("network-details");
         if (details) {
-          details.textContent = `Peers: ${stats.peer_count || 0} | ` +
-            `Routes: ${stats.routes_total || 0} | ` +
-            `Sektor: ${stats.default_sector || "standard"}`;
+          const peers = stats.discovery?.peer_count || 0;
+          const routes = stats.router?.routes_total || 0;
+          const sector = stats.default_sector || "standard";
+          details.textContent = `Peers: ${peers} | ` +
+            `Routes: ${routes} | ` +
+            `Sektor: ${sector}`;
         }
       } else {
         throw new Error("Nicht erreichbar");
