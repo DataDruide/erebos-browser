@@ -9,83 +9,333 @@
 </head>
 <body>
   <div class="container">
-    <header>
+
+    <!-- Header -->
+    <header class="hero">
       <img src="chrome://browser/content/erebos/erebos-logo.svg" alt="Erebos" class="logo">
       <h1>Erebos</h1>
       <p class="tagline">Aus der Dunkelheit ins Netz</p>
     </header>
 
-    <section class="status">
-      <h2>I2P-Status</h2>
-      <div id="i2p-status" class="status-box">
-        <span class="status-indicator">⏳</span>
-        <span class="status-text">Prüfe I2P-Verbindung…</span>
+    <!-- Status-Panel: I2P + Erebos-Network nebeneinander -->
+    <section class="status-panel">
+      <div class="status-card">
+        <div class="status-card-header">
+          <span class="status-card-icon">🌐</span>
+          <h3>I2P-Router</h3>
+        </div>
+        <div id="i2p-status" class="status-box">
+          <span class="status-indicator">⏳</span>
+          <span class="status-text">Prüfe I2P-Verbindung…</span>
+        </div>
+        <p class="hint">
+          <a href="http://127.0.0.1:7070/" target="_blank">I2P-Konsole öffnen</a>
+        </p>
       </div>
-      <p class="hint">
-        <a href="http://127.0.0.1:7070/" target="_blank">I2P-Konsole öffnen</a>
-      </p>
+
+      <div class="status-card">
+        <div class="status-card-header">
+          <span class="status-card-icon">🕸️</span>
+          <h3>Erebos-Network</h3>
+        </div>
+        <div id="network-status" class="network-status-box">
+          <span class="status-indicator">⏳</span>
+          <span class="status-text">Prüfe Erebos-Network…</span>
+        </div>
+        <p id="network-details" class="network-details"></p>
+      </div>
     </section>
 
+    <!-- Hinweis-Kasten -->
+    <aside class="notice">
+      <div class="notice-icon">💡</div>
+      <div class="notice-content">
+        <strong class="notice-title">Hinweis</strong>
+        <p>
+          Erebos benötigt einen laufenden <strong>i2pd-Router</strong> auf
+          <code>127.0.0.1:7070</code> sowie den <strong>Erebos-Network-Daemon</strong>
+          auf <code>127.0.0.1:9050</code>. Beide Dienste müssen gestartet sein,
+          damit eepSites geladen und .erebos-Domains aufgelöst werden können.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Linkliste: Wichtige eepSites -->
     <section class="links">
       <h2>Wichtige eepSites</h2>
       <ul class="eepsite-list">
         <li>
           <a href="http://stats.i2p/" target="_blank">
-            <strong>stats.i2p</strong>
-            <span>I2P-Statistiken und Adressbuch</span>
+            <span class="eepsite-icon">📊</span>
+            <span class="eepsite-body">
+              <strong>stats.i2p</strong>
+              <span>I2P-Statistiken und Adressbuch</span>
+            </span>
           </a>
         </li>
         <li>
           <a href="http://identiguy.i2p/" target="_blank">
-            <strong>identiguy.i2p</strong>
-            <span>I2P-Dienste-Verzeichnis</span>
+            <span class="eepsite-icon">🔎</span>
+            <span class="eepsite-body">
+              <strong>identiguy.i2p</strong>
+              <span>I2P-Dienste-Verzeichnis</span>
+            </span>
           </a>
         </li>
         <li>
           <a href="http://i2p-projekt.i2p/" target="_blank">
-            <strong>i2p-projekt.i2p</strong>
-            <span>Offizielle I2P-Startseite</span>
+            <span class="eepsite-icon">🏠</span>
+            <span class="eepsite-body">
+              <strong>i2p-projekt.i2p</strong>
+              <span>Offizielle I2P-Startseite</span>
+            </span>
           </a>
         </li>
         <li>
           <a href="http://forum.i2p/" target="_blank">
-            <strong>forum.i2p</strong>
-            <span>I2P-Community-Forum</span>
+            <span class="eepsite-icon">💬</span>
+            <span class="eepsite-body">
+              <strong>forum.i2p</strong>
+              <span>I2P-Community-Forum</span>
+            </span>
           </a>
         </li>
       </ul>
     </section>
 
-
+    <!-- Erebos-Network Sektion -->
     <section class="network-section">
       <h2>Erebos-Network</h2>
-      <div id="network-status" class="network-status-box">
-        <span class="status-indicator">⏳</span>
-        <span class="status-text">Prüfe Erebos-Network…</span>
-      </div>
-      <p id="network-details" class="network-details"></p>
 
       <div class="network-form">
-        <label for="sector-select">Anonymitäts-Sektor</label>
-        <select id="sector-select">
-          <option value="fast">Schnell (2 Hops, ~300ms)</option>
-          <option value="standard" selected>Standard (3 Hops, ~800ms)</option>
-          <option value="high">Hoch (5 Hops, ~2s)</option>
-          <option value="mixnet">Mixnet (7 Hops, ~5s)</option>
-        </select>
 
-        <label for="route-target-input">Routing-Test</label>
-        <input id="route-target-input" type="text" placeholder="https://example.com oder http://forum.i2p">
-        <button id="route-btn">Route testen</button>
-        <div id="route-result" class="network-result"></div>
+        <div class="form-group">
+          <label for="sector-select">Anonymitäts-Sektor</label>
+          <select id="sector-select">
+            <option value="fast">Schnell (2 Hops, ~300ms)</option>
+            <option value="standard" selected>Standard (3 Hops, ~800ms)</option>
+            <option value="high">Hoch (5 Hops, ~2s)</option>
+            <option value="mixnet">Mixnet (7 Hops, ~5s)</option>
+          </select>
+        </div>
 
-        <label for="erebos-domain-input">.erebos-Domain auflösen</label>
-        <input id="erebos-domain-input" type="text" placeholder="forum.erebos">
-        <button id="resolve-btn">Auflösen</button>
-        <div id="erebos-domain-result" class="network-result"></div>
+        <div class="form-group">
+          <label for="route-target-input">Routing-Test</label>
+          <div class="input-row">
+            <input id="route-target-input" type="text" placeholder="https://example.com oder http://forum.i2p">
+            <button id="route-btn">Route testen</button>
+          </div>
+          <div id="route-result" class="network-result"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="erebos-domain-input">.erebos-Domain auflösen</label>
+          <div class="input-row">
+            <input id="erebos-domain-input" type="text" placeholder="forum.erebos">
+            <button id="resolve-btn">Auflösen</button>
+          </div>
+          <div id="erebos-domain-result" class="network-result"></div>
+        </div>
+
       </div>
     </section>
 
+    <!-- ===== Community ===== -->
+    <section class="community-section">
+      <h2>Community</h2>
+      <div class="community-grid">
+        <a href="about:community" class="community-card">
+          <span class="community-icon">💬</span>
+          <div>
+            <strong>Forum</strong>
+            <p>Diskutiere Technik, Sicherheit und Governance.</p>
+          </div>
+        </a>
+        <a href="about:wiki" class="community-card">
+          <span class="community-icon">📚</span>
+          <div>
+            <strong>Wiki</strong>
+            <p>Dokumentation, How-Tos und RFCs.</p>
+          </div>
+        </a>
+        <a href="about:members" class="community-card">
+          <span class="community-icon">👥</span>
+          <div>
+            <strong>Mitglieder</strong>
+            <p>Peer-Profile mit Reputation und Badges.</p>
+          </div>
+        </a>
+        <a href="about:events" class="community-card">
+          <span class="community-icon">📅</span>
+          <div>
+            <strong>Events</strong>
+            <p>Meetups, Cryptopartys und Workshops.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== Forum ===== -->
+    <section class="forum-section">
+      <h2>Aktuelle Forum-Threads</h2>
+      <div class="forum-thread">
+        <div class="forum-votes">
+          <strong>42</strong>
+          <span>Votes</span>
+        </div>
+        <div class="forum-body">
+          <h4><a href="about:forum/thread/1">Wie konfiguriere ich Bootstrap-Peers für die DHT?</a></h4>
+          <div class="forum-meta">von <strong>alice</strong> · vor 2 Stunden · 8 Antworten</div>
+        </div>
+      </div>
+      <div class="forum-thread">
+        <div class="forum-votes">
+          <strong>31</strong>
+          <span>Votes</span>
+        </div>
+        <div class="forum-body">
+          <h4><a href="about:forum/thread/2">ThreefishAEAD vs. ChaCha20 — was ist besser?</a></h4>
+          <div class="forum-meta">von <strong>bob</strong> · vor 5 Stunden · 12 Antworten</div>
+        </div>
+      </div>
+      <div class="forum-thread">
+        <div class="forum-votes">
+          <strong>18</strong>
+          <span>Votes</span>
+        </div>
+        <div class="forum-body">
+          <h4><a href="about:forum/thread/3">Topologie-Analyse: BC max = 0.25 — ist das gut?</a></h4>
+          <div class="forum-meta">von <strong>carol</strong> · vor 1 Tag · 5 Antworten</div>
+        </div>
+      </div>
+      <p class="forum-more"><a href="about:forum">Alle Threads anzeigen →</a></p>
+    </section>
+
+    <!-- ===== Mitglieder ===== -->
+    <section class="members-section">
+      <h2>Mitglieder</h2>
+      <div class="members-grid">
+        <div class="member-card">
+          <div class="member-avatar">A</div>
+          <div class="member-info">
+            <strong>alice</strong>
+            <span>Reputation: 0.95</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">B</div>
+          <div class="member-info">
+            <strong>bob</strong>
+            <span>Reputation: 0.87</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">C</div>
+          <div class="member-info">
+            <strong>carol</strong>
+            <span>Reputation: 0.92</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">D</div>
+          <div class="member-info">
+            <strong>dave</strong>
+            <span>Reputation: 0.78</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="member-avatar">E</div>
+          <div class="member-info">
+            <strong>eve</strong>
+            <span>Reputation: 0.65</span>
+          </div>
+        </div>
+      </div>
+      <p class="members-more"><a href="about:members">Alle Mitglieder →</a></p>
+    </section>
+
+    <!-- ===== Events ===== -->
+    <section class="events-section">
+      <h2>Kommende Events</h2>
+      <div class="event">
+        <div class="event-date"><strong>15</strong><span>Nov</span></div>
+        <div class="event-body">
+          <h4>Cryptoparty Berlin</h4>
+          <p>Workshop: Erebos-Browser aufsetzen und .erebos-Domains nutzen.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-date"><strong>22</strong><span>Nov</span></div>
+        <div class="event-body">
+          <h4>Erebos Community Call</h4>
+          <p>Monatlicher Online-Austausch: Roadmap, Governance, Technik.</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="event-date"><strong>05</strong><span>Dez</span></div>
+        <div class="event-body">
+          <h4>Node-Operator-Workshop</h4>
+          <p>Wie betreibe ich einen Erebos-Peer und trage zur DHT bei?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tools ===== -->
+    <section class="tools-section">
+      <h2>Tools</h2>
+      <div class="tools-grid">
+        <a href="about:tools/topology" class="tool-card">
+          <span class="tool-icon">📊</span>
+          <div>
+            <strong>Topologie-Visualizer</strong>
+            <p>Betweenness-Centrality live anzeigen</p>
+          </div>
+        </a>
+        <a href="about:tools/dht" class="tool-card">
+          <span class="tool-icon">🔍</span>
+          <div>
+            <strong>DHT-Explorer</strong>
+            <p>Routing-Tabelle durchsuchen</p>
+          </div>
+        </a>
+        <a href="about:tools/bc-report" class="tool-card">
+          <span class="tool-icon">📈</span>
+          <div>
+            <strong>BC-Report</strong>
+            <p>Kritische Peers identifizieren</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== Governance ===== -->
+    <section class="governance-section">
+      <h2>Governance</h2>
+      <div class="governance-grid">
+        <div class="gov-card">
+          <h3>📜 Aktive Proposals</h3>
+          <p>3 offene Vorschläge zur Abstimmung.</p>
+          <span class="gov-badge warn">3 offen</span>
+        </div>
+        <div class="gov-card">
+          <h3>🗳️ Letzte Abstimmung</h3>
+          <p>„Adaptive Thresholds für BurstBreaker"</p>
+          <span class="gov-badge ok">Angenommen (87%)</span>
+        </div>
+        <div class="gov-card">
+          <h3>🛣️ Roadmap</h3>
+          <p>Q4 2026: Mixnet, Cover-Traffic, Portal.</p>
+          <a href="about:roadmap" class="gov-badge accent">Zur Roadmap</a>
+        </div>
+        <div class="gov-card">
+          <h3>👥 Contributors</h3>
+          <p>12 Entwickler, 5 Node-Operatoren.</p>
+          <a href="about:contribute" class="gov-badge accent">Mitmachen</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info -->
     <section class="info">
       <h2>Über Erebos</h2>
       <p>
@@ -103,6 +353,7 @@
     <footer>
       <p>Erebos Browser – Open Source (MPL 2.0)</p>
     </footer>
+
   </div>
 
   <script src="chrome://browser/content/erebos/network-client.js"></script>

@@ -1,5 +1,6 @@
 /* Erebos Startseite – Styling */
 
+/* === Bestehende Variablen (bleiben, damit network-styles.css kompatibel bleibt) === */
 :root {
   --bg: #0d0518;
   --bg-light: #1a1a2e;
@@ -11,6 +12,34 @@
   --success: #4ade80;
   --error: #f87171;
   --warning: #fbbf24;
+
+  /* Neue Variablen */
+  --card-bg: rgba(26, 26, 46, 0.6);
+  --card-bg-hover: rgba(139, 92, 246, 0.08);
+  --card-border: rgba(139, 92, 246, 0.2);
+  --card-border-strong: rgba(139, 92, 246, 0.45);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 24px rgba(139, 92, 246, 0.35);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --transition: 0.2s ease;
+}
+
+/* === Light Mode === */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f1fa;
+    --bg-light: #ffffff;
+    --text: #1a1a2e;
+    --text-dim: #5a5a72;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-bg-hover: rgba(139, 92, 246, 0.08);
+    --card-border: rgba(139, 92, 246, 0.25);
+    --card-border-strong: rgba(139, 92, 246, 0.55);
+    --shadow-sm: 0 2px 8px rgba(80, 40, 140, 0.08);
+    --shadow-md: 0 8px 24px rgba(80, 40, 140, 0.12);
+  }
 }
 
 * {
@@ -19,33 +48,53 @@
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   background: radial-gradient(circle at top, #1a1a2e 0%, #0d0518 100%);
+  background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
-  padding: 2rem 1rem;
+  padding: 2.5rem 1rem 3rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: radial-gradient(circle at top, #ffffff 0%, #ece6f8 100%);
+  }
 }
 
 .container {
-  max-width: 720px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
-header {
+/* === Header === */
+.hero {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
+  animation: fadeIn 0.5s ease both;
 }
 
 .logo {
   width: 96px;
   height: 96px;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
+  filter: drop-shadow(0 0 24px rgba(139, 92, 246, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05) rotate(-2deg);
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2.6rem;
   font-weight: 700;
   background: linear-gradient(135deg, var(--violet-light), var(--violet));
   -webkit-background-clip: text;
@@ -61,13 +110,63 @@ h1 {
   font-size: 1.05rem;
 }
 
+/* === Status-Panel (I2P + Erebos nebeneinander) === */
+.status-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .status-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+.status-card {
+  padding: 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  animation: fadeIn 0.5s ease both;
+}
+
+.status-card:hover {
+  border-color: var(--card-border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.status-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.status-card-icon {
+  font-size: 1.2rem;
+}
+
+.status-card-header h3 {
+  font-size: 0.8rem;
+  color: var(--violet-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+/* === Bestehende section-Styles (bleiben) === */
 section {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background: rgba(26, 26, 46, 0.6);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
   backdrop-filter: blur(10px);
+  animation: fadeIn 0.5s ease both;
 }
 
 h2 {
@@ -79,96 +178,531 @@ h2 {
   font-weight: 600;
 }
 
-/* I2P-Status */
+/* === I2P-Status === */
 .status-box {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: rgba(13, 5, 24, 0.6);
   border: 1px solid rgba(139, 92, 246, 0.3);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+@media (prefers-color-scheme: light) {
+  .status-box {
+    background: rgba(139, 92, 246, 0.05);
+  }
 }
 
 .status-indicator {
   font-size: 1.5rem;
+  line-height: 1;
 }
 
 .status-text {
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .status-box.online {
   border-color: var(--success);
-  background: rgba(74, 222, 128, 0.05);
+  background: rgba(74, 222, 128, 0.06);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.15);
 }
 
 .status-box.offline {
   border-color: var(--error);
-  background: rgba(248, 113, 113, 0.05);
+  background: rgba(248, 113, 113, 0.06);
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.15);
 }
 
 .hint {
   margin-top: 0.75rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
-/* eepSite-Liste */
+.hint a {
+  color: var(--violet-light);
+  text-decoration: none;
+}
+
+.hint a:hover {
+  text-decoration: underline;
+}
+
+/* === Hinweis-Kasten === */
+.notice {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.12),
+    rgba(139, 92, 246, 0.04)
+  );
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-left: 4px solid var(--violet);
+  border-radius: var(--radius);
+  animation: fadeIn 0.5s ease both;
+}
+
+.notice-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.notice-content {
+  flex: 1;
+}
+
+.notice-title {
+  display: block;
+  color: var(--violet-light);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.notice-content p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.notice-content code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  padding: 0.1em 0.4em;
+  background: rgba(139, 92, 246, 0.15);
+  border-radius: 4px;
+  color: var(--violet-light);
+}
+
+/* === eepSite-Liste === */
 .eepsite-list {
   list-style: none;
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
 }
 
+@media (max-width: 640px) {
+  .eepsite-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 .eepsite-list a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   padding: 1rem;
   background: rgba(13, 5, 24, 0.5);
   border: 1px solid rgba(139, 92, 246, 0.15);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   text-decoration: none;
   color: var(--text);
-  transition: all 0.2s ease;
+  transition: all var(--transition);
+}
+
+@media (prefers-color-scheme: light) {
+  .eepsite-list a {
+    background: rgba(139, 92, 246, 0.04);
+  }
 }
 
 .eepsite-list a:hover {
   border-color: var(--violet);
-  background: rgba(139, 92, 246, 0.1);
-  transform: translateX(4px);
+  background: var(--card-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.eepsite-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.eepsite-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
 }
 
 .eepsite-list strong {
   display: block;
   color: var(--violet-light);
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .eepsite-list span {
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
 
-/* Info-Bereich */
+/* === Info-Bereich === */
 .info p {
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.info p:last-child {
+  margin-bottom: 0;
 }
 
 a {
   color: var(--violet-light);
   text-decoration: none;
+  transition: color var(--transition);
 }
 
 a:hover {
   text-decoration: underline;
 }
 
+/* === Footer === */
 footer {
   text-align: center;
   color: var(--text-dim);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   margin-top: 3rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+/* === Eingabefelder: neue Wrapper-Klassen für saubere Anordnung === */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: stretch;
+}
+
+.input-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.input-row button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .input-row {
+    flex-direction: column;
+  }
+}
+
+/* === Animation === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ============================================================
+   Community Portal — Sektionen
+   ============================================================ */
+
+.community-section,
+.forum-section,
+.members-section,
+.events-section,
+.tools-section,
+.governance-section {
+  margin-top: 2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.community-grid,
+.tools-grid,
+.governance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.community-card,
+.tool-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.community-card:hover,
+.tool-card:hover {
+  border-color: var(--card-border-strong);
+  background: var(--card-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.community-icon,
+.tool-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.community-card strong,
+.tool-card strong {
+  display: block;
+  color: var(--violet-light);
+  margin-bottom: 0.25rem;
+}
+
+.community-card p,
+.tool-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* === Forum === */
+.forum-thread {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  margin-bottom: 0.6rem;
+  transition: all var(--transition);
+}
+
+.forum-thread:hover {
+  border-color: var(--card-border-strong);
+}
+
+.forum-votes {
+  text-align: center;
+  min-width: 50px;
+  padding-right: 1rem;
+  border-right: 1px solid var(--card-border);
+}
+
+.forum-votes strong {
+  display: block;
+  font-size: 1.3rem;
+  color: var(--violet-light);
+}
+
+.forum-votes span {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.forum-body h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+.forum-body h4 a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.forum-body h4 a:hover {
+  color: var(--violet-light);
+}
+
+.forum-meta {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.forum-more,
+.members-more {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.forum-more a,
+.members-more a {
+  color: var(--violet-light);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+/* === Members === */
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.member-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+}
+
+.member-card:hover {
+  border-color: var(--card-border-strong);
+  background: var(--card-bg-hover);
+}
+
+.member-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.member-info strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.member-info span {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+/* === Events === */
+.event {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  margin-bottom: 0.6rem;
+  transition: all var(--transition);
+}
+
+.event:hover {
+  border-color: var(--card-border-strong);
+}
+
+.event-date {
+  text-align: center;
+  min-width: 60px;
+  padding: 0.5rem;
+  background: var(--card-bg-hover);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+}
+
+.event-date strong {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--violet-light);
+}
+
+.event-date span {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.event-body h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.event-body p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* === Governance === */
+.gov-card {
+  padding: 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+}
+
+.gov-card:hover {
+  border-color: var(--card-border-strong);
+  background: var(--card-bg-hover);
+}
+
+.gov-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--violet-light);
+}
+
+.gov-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+}
+
+.gov-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  border: 1px solid var(--card-border);
+  text-decoration: none;
+}
+
+.gov-badge.ok {
+  background: rgba(74, 222, 128, 0.12);
+  border-color: rgba(74, 222, 128, 0.4);
+  color: var(--success);
+}
+
+.gov-badge.warn {
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.4);
+  color: var(--warning);
+}
+
+.gov-badge.accent {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: var(--card-border-strong);
+  color: var(--violet-light);
 }

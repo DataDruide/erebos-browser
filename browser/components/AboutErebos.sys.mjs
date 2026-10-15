@@ -30,6 +30,18 @@ AboutErebos.prototype = {
     let uri = Services.io.newURI(ABOUT_PAGE);
     let channel = Services.io.newChannelFromURIWithLoadInfo(uri, aLoadInfo);
     channel.originalURI = aURI;
+
+    // CSP: erlaubt fetch() von chrome:// zu http://127.0.0.1:9050
+    // (Erebos-Network-Daemon). Ohne diese Ausnahme blockiert Firefox
+    // den Request still, bevor er den Server erreicht.
+    const csp =
+      "default-src 'self' chrome:; " +
+      "connect-src 'self' http://127.0.0.1:9050; " +
+      "script-src 'self' chrome:; " +
+      "style-src 'self' chrome: 'unsafe-inline'; " +
+      "img-src 'self' chrome: data:;";
+    channel.setResponseHeader("Content-Security-Policy", csp, false);
+
     return channel;
   },
 
