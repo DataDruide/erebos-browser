@@ -123,10 +123,52 @@
     }
   }
 
+  /**
+   * Laedt die Mitglieder-Liste aus dem Daemon und rendert sie.
+   */
+  async function loadMembers() {
+    const grid = document.getElementById("members-grid");
+    if (!grid) return;
+
+    try {
+      const data = await API.getMembers();
+      if (!data.success || !data.members || data.members.length === 0) {
+        grid.innerHTML =
+          '<p class="members-empty">Noch keine Peers bekannt.</p>';
+        return;
+      }
+
+      grid.innerHTML = data.members
+        .map((m) => {
+          const initial = (m.peer_id || "?").charAt(0).toUpperCase();
+          const trust = m.is_trusted ? "trusted" : "untrusted";
+          return `
+            <div class="member-card ${trust}">
+              <div class="member-avatar">${initial}</div>
+              <div class="member-info">
+                <strong>${m.peer_id}</strong>
+                <span>Reputation: ${m.reputation.toFixed(2)}</span>
+                <span class="member-status">${
+                  m.is_online ? "🟢 online" : "⚫ offline"
+                }</span>
+              </div>
+            </div>`;
+        })
+        .join("");
+    } catch (err) {
+      console.error("[Erebos] loadMembers fehlgeschlagen:", err);
+      grid.innerHTML =
+        '<p class="members-error">Mitglieder konnten nicht geladen werden.</p>';
+    }
+  }
+
   // Initialisierung
   document.addEventListener("DOMContentLoaded", () => {
     updateNetworkStatus();
     setInterval(updateNetworkStatus, 30000);
+
+    loadMembers();
+    setInterval(loadMembers, 30000);
 
     const resolveBtn = document.getElementById("resolve-btn");
     if (resolveBtn) resolveBtn.addEventListener("click", resolveErebosDomain);

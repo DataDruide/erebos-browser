@@ -75,6 +75,26 @@ const ErebosNetworkClient = {
    * Gibt Statistiken zurück.
    * @returns {Promise<object>}
    */
+  /**
+   * Laedt die Liste der bekannten Peers (Community-Mitglieder).
+   * @returns {Promise<{success: boolean, count: number, members: Array}>}
+   */
+  async getMembers() {
+    try {
+      const response = await fetch(
+        `${EREBOS_NETWORK_URL}/api/community/members`,
+        { mode: "cors" }
+      );
+      if (!response.ok) {
+        return { success: false, count: 0, members: [] };
+      }
+      return await response.json();
+    } catch (err) {
+      console.error("[Erebos] getMembers fehlgeschlagen:", err);
+      return { success: false, count: 0, members: [] };
+    }
+  },
+
   async getStats() {
     try {
       const response = await fetch(`${EREBOS_NETWORK_URL}/stats`, {
