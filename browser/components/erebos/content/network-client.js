@@ -95,6 +95,19 @@ const ErebosNetworkClient = {
     }
   },
 
+  async getGovernance() {
+    try {
+      const response = await fetch(
+        `${EREBOS_NETWORK_URL}/api/community/governance`,
+        { mode: "cors" }
+      );
+      if (!response.ok) return { success: false, count: 0, proposals: [] };
+      return await response.json();
+    } catch (err) {
+      return { success: false, count: 0, proposals: [] };
+    }
+  },
+
   async getStats() {
     try {
       const response = await fetch(`${EREBOS_NETWORK_URL}/stats`, {

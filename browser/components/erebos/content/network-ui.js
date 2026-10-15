@@ -162,6 +162,30 @@
     }
   }
 
+  async function loadGovernance() {
+    const grid = document.getElementById("governance-grid");
+    if (!grid) return;
+    try {
+      const data = await API.getGovernance();
+      if (!data.success || !data.proposals || data.proposals.length === 0) {
+        grid.innerHTML = '<p class="gov-empty">Noch keine Proposals.</p>';
+        return;
+      }
+      grid.innerHTML = data.proposals
+        .map((p) => `
+          <div class="gov-card">
+            <h3>${p.title || p.id}</h3>
+            <p>${p.description || ""}</p>
+            <span class="gov-badge ok">
+              ${p.votes_yes} / ${p.total_votes} (${(p.approval_ratio * 100).toFixed(0)}%)
+            </span>
+          </div>`)
+        .join("");
+    } catch (err) {
+      console.error("[Erebos] loadGovernance fehlgeschlagen:", err);
+    }
+  }
+
   // Initialisierung
   document.addEventListener("DOMContentLoaded", () => {
     updateNetworkStatus();
@@ -169,6 +193,9 @@
 
     loadMembers();
     setInterval(loadMembers, 30000);
+
+    loadGovernance();
+    setInterval(loadGovernance, 30000);
 
     const resolveBtn = document.getElementById("resolve-btn");
     if (resolveBtn) resolveBtn.addEventListener("click", resolveErebosDomain);
