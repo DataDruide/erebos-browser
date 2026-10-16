@@ -9,6 +9,35 @@
 const EREBOS_NETWORK_URL = "http://127.0.0.1:9050";
 
 /**
+ * Holt JSON vom Daemon und entfernt Server-seitiges Padding.
+ *
+ * Der Erebos-Network-Daemon pad-ed JSON-Antworten auf 256-Byte-Buckets
+ * mit trailing whitespace. Der Daemon sendet den Header
+ * "X-Erebos-Original-Size" mit der Laenge VOR dem Padding. Wir schneiden
+ * den Body auf diese Laenge zurueck und parsen erst dann.
+ *
+ * Fallback: Fehlt der Header (aeltere Daemon-Version), wird der volle
+ * Text geparst — JSON ignoriert trailing whitespace von sich aus.
+ *
+ * @param {string} url
+ * @param {object} [options]
+ * @returns {Promise<object>}
+ */
+async function fetchJsonUnpadded(url, options = {}) {
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    const err = new Error(`HTTP ${response.status}`);
+    err.status = response.status;
+    throw err;
+  }
+  const headerVal = response.headers.get("X-Erebos-Original-Size");
+  const origSize = headerVal ? parseInt(headerVal, 10) : 0;
+  const text = await response.text();
+  const clean = origSize > 0 ? text.slice(0, origSize) : text;
+  return JSON.parse(clean);
+}
+
+/**
  * Erebos Network Client
  */
 const ErebosNetworkClient = {
@@ -42,11 +71,10 @@ const ErebosNetworkClient = {
       const params = new URLSearchParams({ target });
       if (sector) params.append("sector", sector);
 
-      const response = await fetch(
+      return await fetchJsonUnpadded(
         `${EREBOS_NETWORK_URL}/route?${params}`,
         { mode: "cors" }
       );
-      return await response.json();
     } catch (err) {
       console.error("Erebos route error:", err);
       return { success: false, error: String(err) };
@@ -60,11 +88,10 @@ const ErebosNetworkClient = {
    */
   async resolveDomain(domain) {
     try {
-      const response = await fetch(
+      const data = await fetchJsonUnpadded(
         `${EREBOS_NETWORK_URL}/resolve?name=${encodeURIComponent(domain)}`,
         { mode: "cors" }
       );
-      const data = await response.json();
       return data.address || null;
     } catch (err) {
       return null;
@@ -81,14 +108,10 @@ const ErebosNetworkClient = {
    */
   async getMembers() {
     try {
-      const response = await fetch(
+      return await fetchJsonUnpadded(
         `${EREBOS_NETWORK_URL}/api/community/members`,
         { mode: "cors" }
       );
-      if (!response.ok) {
-        return { success: false, count: 0, members: [] };
-      }
-      return await response.json();
     } catch (err) {
       console.error("[Erebos] getMembers fehlgeschlagen:", err);
       return { success: false, count: 0, members: [] };
@@ -97,12 +120,10 @@ const ErebosNetworkClient = {
 
   async getGovernance() {
     try {
-      const response = await fetch(
+      return await fetchJsonUnpadded(
         `${EREBOS_NETWORK_URL}/api/community/governance`,
         { mode: "cors" }
       );
-      if (!response.ok) return { success: false, count: 0, proposals: [] };
-      return await response.json();
     } catch (err) {
       return { success: false, count: 0, proposals: [] };
     }
@@ -110,10 +131,9 @@ const ErebosNetworkClient = {
 
   async getStats() {
     try {
-      const response = await fetch(`${EREBOS_NETWORK_URL}/stats`, {
+      return await fetchJsonUnpadded(`${EREBOS_NETWORK_URL}/stats`, {
         mode: "cors",
       });
-      return await response.json();
     } catch (err) {
       return { error: String(err) };
     }
